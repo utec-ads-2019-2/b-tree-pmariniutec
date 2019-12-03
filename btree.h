@@ -98,8 +98,6 @@ bool BTree<T>::remove(T k) {
 	uint32 i = findIndex(curr, k);
 
 	if (i < curr->size && !(curr->keys[i] < k || k < curr->keys[i])) {
-	  auto ret = curr->keys[i];
-
 	  if (curr->isLeaf) {
 		deleteNode(curr, i);
 	  } else {
@@ -187,7 +185,7 @@ void BTree<T>::print() {
 template <typename T>
 void BTree<T>::deleteNode(Node<T>* x) {
   if (!x->isLeaf) {
-	for (uint32 i = 0; i <= x->size; i++) {
+	for (uint32 i = 0; i <= x->size; ++i) {
 	  deleteNode(x->children[i]);
 	}
   }
@@ -199,7 +197,7 @@ template <typename T>
 uint32 BTree<T>::findIndex(Node<T>* x, T k) {
   uint32 i = 0;
   while (i < x->size && x->keys[i] < k) {
-	i++;
+	++i;
   }
   return i;
 }
@@ -243,11 +241,11 @@ void BTree<T>::splitChild(Node<T>* x, int i) {
   auto split = x->children[i];
   auto newNode = new Node<T>{ degree - 1, split->isLeaf };
 
-  for (uint32 j = 0; j < degree - 1; j++) {
+  for (uint32 j = 0; j < degree - 1; ++j) {
 	newNode->keys[j] = split->keys[j + degree];
   }
   if (!split->isLeaf) {
-	for (uint32 j = 0; j < degree; j++) {
+	for (uint32 j = 0; j < degree; ++j) {
 	  newNode->children[j] = split->children[j + degree];
 	}
   }
@@ -267,7 +265,7 @@ char BTree<T>::mergeChildren(Node<T>* parent, uint32 i) {
   leftChild->keys[leftChild->size] = deleteNode(parent, i);
   uint32 j = ++(leftChild->size);
 
-  for (uint32 k = 0; k < rightChild->size; k++) {
+  for (uint32 k = 0; k < rightChild->size; ++k) {
 	leftChild->keys[j + k] = rightChild->keys[k];
 	leftChild->children[j + k] = rightChild->children[k];
   }
@@ -324,18 +322,18 @@ char BTree<T>::fixChildSize(Node<T>* parent, uint32 index) {
 template <typename T>
 void BTree<T>::printNode(Node<T>* node, uint32 tabCount) {
 
-  for (uint32 i = 0; i < tabCount; i++) {
+  for (uint32 i = 0; i < tabCount; ++i) {
 	std::cout << '\t';
   }
 
-  for (uint32 i = 0; i < node->size; i++) {
+  for (uint32 i = 0; i < node->size; ++i) {
 	std::cout << node->keys[i] << ' ';
   }
   std::cout << '\n';
 
   if (!node->isLeaf) {
 	tabCount++;
-	for (uint32 i = 0; i <= node->size; i++) {
+	for (uint32 i = 0; i <= node->size; ++i) {
 	  printNode(node->children[i], tabCount);
 	}
   }
