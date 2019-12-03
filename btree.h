@@ -164,10 +164,12 @@ template <typename T>
 T BTree<T>::search(T k) {
   auto node = searchKey(k);
 
-  if (node.first == nullptr)
-	return false;
-  else
+  if (node.first == nullptr) {
+	std::cout << "Key " << k << " doesn't exists in the tree. ";
+	return 0;
+  } else {
 	return node.first->keys[node.second];
+  }
 }
 
 

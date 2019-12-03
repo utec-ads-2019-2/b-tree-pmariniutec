@@ -22,11 +22,15 @@ int main(int argc, char *argv[]) {
 	tree.insert(dist(rng));
   }
 
-  tree.print();
+  std::cout << "Search: " << tree.search(25) << '\n';
+  std::cout << "Search: " << tree.search(74) << '\n';
+  std::cout << "Search: " << tree.search(115) << '\n';
+  std::cout << "Search: " << tree.search(120) << '\n';
 
   tree.remove(25);
   tree.remove(120);
   tree.remove(12);
 
-  tree.print();
+  std::cout << "Search: " << tree.search(25) << '\n';
+
 }
