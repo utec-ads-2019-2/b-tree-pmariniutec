@@ -176,8 +176,6 @@ void BTree<T>::print() {
   std::cout << "Printing B-Tree (degree: " << degree << ")\n";
   if (root != nullptr) {
 	printNode(root, 0);
-  } else {
-	std::cout << "Tree is Empty.\n";
   }
 }
 

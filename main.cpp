@@ -10,10 +10,9 @@ int main(int argc, char *argv[]) {
   std::random_device dev;
   std::mt19937 rng(dev());
   std::uniform_int_distribution<unsigned int> d6(2, 6);
+  std::uniform_int_distribution<int> dist(1, 4000);
 
   BTree<int> tree{ d6(rng) };
-
-  std::uniform_int_distribution<unsigned int> dist(1, 4000);
 
   tree.insert(25);
   tree.insert(12);
