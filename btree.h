@@ -20,7 +20,7 @@ template <typename T>
 class BTree {
   public:
 	BTree(uint32 degree);
-	~BTree();
+	~BTree(); 
 
 	T search(T k);
 	bool insert(T k);
@@ -166,7 +166,7 @@ T BTree<T>::search(T k) {
 
   if (node.first == nullptr) {
 	std::cout << "Key " << k << " doesn't exists in the tree. ";
-	return 0;
+	return 0; // 0 podría ser un valor válido
   } else {
 	return node.first->keys[node.second];
   }
